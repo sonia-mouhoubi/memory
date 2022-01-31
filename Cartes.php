@@ -1,15 +1,16 @@
 <?php
-session_start();
 Class Carte {
 
     public $dos;
     public $face;
+    public $valeur;
 
-    // public function __construct($dos, $face) 
-    // {
-    //     $this->dos = $dos;
-    //     $tis->face = $face;
-    // }
+    public function __construct($valeur) 
+    {
+       $this->valeur = $valeur;
+
+
+    }
 
     public function carte_aleatoire() {
         

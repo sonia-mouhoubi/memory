@@ -1,19 +1,43 @@
 <?php
+session_start();
 require 'Cartes.php';
-// Carte coté DOS
-$dosCarte1 = new Carte();
-$dosCarte2 = new Carte();
-$dosCarte3 = new Carte();
-$dosCarte4 = new Carte();
-$dosCarte5 = new Carte();
-$dosCarte6 = new Carte();
-// Carte coté FACE
-$faceCarte1 = new Carte();
-$faceCarte2 = new Carte();
-$faceCarte3 = new Carte();
-$faceCarte4 = new Carte();
-$faceCarte5 = new Carte();
-$faceCarte6 = new Carte();
+
+if(!isset($_GET['lien'])) {
+    if(isset($_SESSION['game'])) {
+        // var_dump($_SESSION['game'][$_GET['id']]);
+
+    }
+    else {
+        $_SESSION['game'] = [];
+        for($i=1; $i<=3; $i++) {
+            $tab['game'][$i] = new Carte($i);
+            var_dump($tab['game'][$i]);
+        }
+        $table = $tab['game'];
+        $_SESSION['game'] = array_merge($tab['game'], $table);
+        shuffle($_SESSION['game']);
+
+        // var_dump($_SESSION['game']);
+
+
+    }
+}
+
+// // Carte coté DOS
+// $dosCarte1 = new Carte();
+// $dosCarte2 = new Carte();
+// $dosCarte3 = new Carte();
+// $dosCarte4 = new Carte();
+// $dosCarte5 = new Carte();
+// $dosCarte6 = new Carte();
+// // Carte coté FACE
+// $faceCarte1 = new Carte();
+// $faceCarte2 = new Carte();
+// $faceCarte3 = new Carte();
+// $faceCarte4 = new Carte();
+// $faceCarte5 = new Carte();
+// $faceCarte6 = new Carte();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -46,38 +70,17 @@ $faceCarte6 = new Carte();
 
                 <div class="container container1">
                 <?php
-                $carteDos1 = $dosCarte1->dosCarte();
-                $carteDos2 = $dosCarte2->dosCarte();
-                $carteDos3 = $dosCarte3->dosCarte();
-                $carteDos4 = $dosCarte4->dosCarte();
-                $carteDos5 = $dosCarte5->dosCarte();
-                $carteDos6 = $dosCarte6->dosCarte();
+                for($j=0; $j<6; $j++)  {
+                    // var_dump($_SESSION['game'][$j]);
+                    echo "<a href='index.php?id=$j'><div class='cartes'>X</div></a>"; 
 
-                if(isset($_GET['lien']) && $_GET['lien']=='lien1') {
-                    echo $faceCarte1->faceCarte("coucou");
-                } 
-                if(isset($_GET['lien']) && $_GET['lien']=='lien2') {
-                    echo $faceCarte1->faceCarte("coucou");
                 }
-                if(isset($_GET['lien']) && $_GET['lien']=='lien3') {
-                    echo $faceCarte1->faceCarte("sonia");
-                }
-                if(isset($_GET['lien']) && $_GET['lien']=='lien4') {
-                    echo $faceCarte1->faceCarte("sonia");
-                }
-                if(isset($_GET['lien']) && $_GET['lien']=='lien5') {
-                    echo $faceCarte1->faceCarte("chapeau");
-                }
-                if(isset($_GET['lien']) && $_GET['lien']=='lien6') {
-                    echo $faceCarte1->faceCarte("chapeau");
-                }  
 
-                echo "<a href='index.php?lien=lien1'>$carteDos1</a>"; 
-                echo "<a href='index.php?lien=lien2'>$carteDos2</a>"; 
-                echo "<a href='index.php?lien=lien3'>$carteDos3</a>"; 
-                echo "<a href='index.php?lien=lien4'>$carteDos4</a>"; 
-                echo "<a href='index.php?lien=lien5'>$carteDos5</a>"; 
-                echo "<a href='index.php?lien=lien6'>$carteDos6</a>"; 
+                // echo "<a href='index.php?lien=carte2'>$carteDos2</a>"; 
+                // echo "<a href='index.php?lien=carte3'>$carteDos3</a>"; 
+                // echo "<a href='index.php?lien=carte4'>$carteDos4</a>"; 
+                // echo "<a href='index.php?lien=carte5'>$carteDos5</a>"; 
+                // echo "<a href='index.php?lien=carte6'>$carteDos6</a>"; 
 
                 ?>   
                 </div>
