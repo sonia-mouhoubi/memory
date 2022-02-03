@@ -2,18 +2,18 @@
 Class Carte {
 
     public $etat = 'close';
-    private $valeur;
-    private $id;
+    public $valeur;
+    // private $id;
 
     public function __construct($valeur) 
     {
         $this->valeur = $valeur;
     }
 
-    public function melange_carte($cartes) 
-    {
-        return shuffle($cartes);   
-    }
+    // public function melange_carte() 
+    // {
+    //     return shuffle();   
+    // }
 
     // public function setEtatCarte() 
     // {
@@ -23,15 +23,19 @@ Class Carte {
     //     // return $this->valeur;
         
     // }
-    public function getEtatCarte() 
-    {
-        return $this->etat;
-    } 
+    // public function getEtatCarte() 
+    // {
+    //     return $this->valeur;
+    // } 
 
     public function openEtatCarte() 
     {
         $this->etat = 'open';
     } 
+    public function suprimeCarte() 
+    {
+        session_destroy();
+    }
 }
 
 ?>
