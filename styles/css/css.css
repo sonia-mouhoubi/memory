@@ -8,13 +8,13 @@ img {
     padding-right: 3rem;
 }
 .container {
-    width: 50%;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
 }
 .container1{
-    width: 40%;
+    width: 100%;
 }
 .jeux h1 {
     flex-basis: 100%;
