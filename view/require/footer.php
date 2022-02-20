@@ -1,3 +1,3 @@
 <footer>
-    <a href="">GITHUB</a>
+    <a href="https://github.com/sonia-mouhoubi/memory.git">GITHUB</a>
 </footer>

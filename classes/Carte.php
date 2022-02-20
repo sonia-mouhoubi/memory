@@ -3,7 +3,6 @@ Class Carte {
 
     public $etat = 'close';
     public $valeur;
-    // private $id;
 
     public function __construct($valeur) 
     {

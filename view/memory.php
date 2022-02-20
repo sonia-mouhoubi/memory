@@ -1,5 +1,15 @@
 <?php
-require ('../traitements/page-traitement/traitement-memory.php'); 
+require ('../traitements/page-traitement/traitement-memory.php');
+// function la_fonction_qui_compte() {
+//     $verifiercompteur = 0;
+//     $game = $_SESSION['game'];
+//     foreach($game as $key => $objets) {
+//         if($objets->etat == 'close')
+//         $verifiercompteur++;
+        
+//     }
+//     return $verifiercompteur;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -7,67 +17,60 @@ require ('../traitements/page-traitement/traitement-memory.php');
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Accueil - Jeux du Mémory</title>
-        <meta name="description" content="Jeux du mémory en php.">
-       
+        <title>Accueil - Jeu du Mémory</title>
+        <meta name="description" content="Accueil - Jeu du Memory">
         <link href="../styles/css/css.css" rel="stylesheet">
     </head>
-    <body>
+    <body> 
         <?php require ('require/header.php'); ?>         
         <main>
             <section class="jeux">
-                <h1>MEMORY</h1>
+                <h1>Memory</h1>
 
-                <form action="" method="post">
+                <form action="../traitements/form-traitement/form-memory.php" method="post">
                     <label for="nb_carte">Choisisez un nombre de paire entre 3 et 12.</label>
-                    <input type="number" id="paire_carte" name="paire_carte">
+                    <input type="number" id="paire_carte" name="paire_carte" min="3" max="12">
                     <input type="submit" id="jouer" name="jouer" value="JOUER">
                 </form> 
-                
-                <div class="container container1">
-                <?php
-                // // Si je clique sur JOUER
-                // if(isset($_POST['jouer'])) {
-                // // Si mon nb de paire est séléctionnée
-                //     if(isset($_POST['paire_carte'])) {
-                // // Je multiplie mes paires par 2
-                //         $nb_carte = $_POST['paire_carte']*2;
-                // // Je boucle sur le nb cartes demandée par l'utilisateur
-                //         for($i=0; $i<$nb_carte; $i++) {
-                // // Si ma session (objet), son état est à CLOSE
-                //             if($_SESSION['game'][$i]->etat == 'close') {
-                // // J'echo mes cartes retournées qui prennent comme lien GET mon compteur $i(boucle FOR)                 
-                //                 echo "<a href='memory.php?lien=$i'><div class='cartes'><img src='../assets/img/dos.png'></div></a>"; 
-                //             }
-                // // Sinon je stocke dans une variable ma session avec sa valeur qui me permet de donner les même valeurs à mes images.
-                //             else {
-                //                 $valcard = $_SESSION['game'][$i]->valeur;
-                //                 echo "<div class='cartes'><img src='../assets/img/$valcard.png'></div>";  
-                //             }   
-                //         }
-                        
-                //     }
-                // }
 
-                for($i=0; $i<6; $i++) {
-        // Si ma session (objet), son état est à CLOSE
-                    if($_SESSION['game'][$i]->etat == 'close') {
-        // J'echo mes cartes retournées qui prennent comme lien GET mon compteur $i(boucle FOR)                 
-                        echo "<a href='memory.php?lien=$i'><div class='cartes'><img src='../assets/img/dos.png'></div></a>"; 
+                <form action="../traitements/form-traitement/form-memory.php" method="post">
+                    <input type="submit" id="rejouer" name="rejouer" value="REJOUER">
+                </form> 
+                
+                <div class="container">
+                <?php
+                    $game = $_SESSION['game'];
+                    // Foreach pour récupèrer l'objet du game
+                    foreach($game as $key => $objets) {
+                        if($objets->etat == 'close') {
+                            echo "<a href='memory.php?lien=$key'><div class='cartes'><img src='../assets/img/dos.png'></div></a>"; 
+                        }
+                        else {
+                        // On récupére de l'objet sa valeur pour afficher les cartes retournées
+                            $valcard = $objets->valeur;
+                            echo "<div class='cartes'><img src='../assets/img/$valcard.png'></div>";  
+                        }   
                     }
-        // Sinon je stocke dans une variable ma session avec sa valeur qui me permet de donner les même valeurs à mes images.
-                    else {
-                        $valcard = $_SESSION['game'][$i]->valeur;
-                        echo "<div class='cartes'><img src='../assets/img/$valcard.png'></div>";  
-                    }   
-        
-                }
-    
+                    if(isset($_SESSION['coup'])) {
+                        echo '<div> Coup : '.$_SESSION['coup'].'</div>';
+                    }
+                    if(isset($_SESSION['nbPaire'])) {
+                        echo '<div> Nombre de paire trouvée : '.$_SESSION['nbPaire'].'</div>';
+                    }
+                    if(isset($_SESSION['level'])) {
+                        echo '<div> Level : '.$_SESSION['level'].' paires </div>';
+                    }
+                    if(isset($_SESSION['msgEndGame'])) {
+                        echo $_SESSION['msgEndGame'];
+                    }
+                    if(isset($_SESSION['point'])) {
+                        echo '<div> Points : '.$_SESSION['point'].'</div>';
+                    }
+
                 ?>   
                 </div>
             </section>
         </main>
-      
+        <?php require('require/footer.php'); ?>         
     </body>
 </html>
-
