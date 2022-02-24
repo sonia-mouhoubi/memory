@@ -17,7 +17,7 @@ session_start();
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
-        <link href="../styles/css/css.css" rel="stylesheet">
+        <link href="../styles/css.css" rel="stylesheet">
     </head>
     <body>
     <?php require ('require/header.php'); ?>         

@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+require '../classes/Score.php';
+$score = new Score();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,22 +16,20 @@ session_start();
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
-        <link href="../styles/css/css.css" rel="stylesheet">
+        <link href="../styles/css.css" rel="stylesheet">
     </head>
-    <body class="body-profil">
+    <body>
     <?php require ('require/header.php'); 
 ?>         
-        <main>
+        <main class="main-profil">
             <section class="section-profil">
                 <h2>Profil</h2>
-
+                <?php $user->error();?>                
                 <form class="form" action="../traitements/form-traitement/form-profil.php" method="post">
                     <label for="login">Login</label>
                     <input type="text" id="login" name="login" value="<?php if(isset($_SESSION['login'])) { echo $user->getLogin($_SESSION['login'])['login'];}?>">
                     
                     <input type="submit" id="buttonL" name="buttonL">
-                    <!-- Message d'erreur -->
-                    <?php $user->error()?>
                 </form>
                 
                 <form class="form" action="../traitements/form-traitement/form-profil.php" method="post">
@@ -44,9 +43,19 @@ session_start();
                     <input type="password" id="password2" name="password2">
 
                     <input type="submit" id="buttonP" name="buttonP">
-                    <!-- Message d'erreur -->
-                    <?php $user->error()?>
                 </form>
+            </section>
+
+            <section class="progression-game">
+                <h2>Progression individuelle</h2>
+                <?php
+                foreach($score->getInfosUser($_SESSION['login']) as $value) {
+                    echo '<div>';
+                    echo '<p>Point : '.$value['point'].'</p>';
+                    echo '<p>Niveau : '.$value['level'].'</p>';
+                    echo '<p>Coup : '.$value['coup'].'</p>';  
+                    echo '</div>';
+                }?>
             </section>
         </main>
         <?php require('require/footer.php'); ?>         

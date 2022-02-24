@@ -17,38 +17,6 @@ class User {
         }
     }
 
-    // Fonction pour verifier s'il n'y a pas déja un user en bdd
-    public function getLogin($login) {
-        $this->login = $login;
-
-        $req = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = :login");
-        $req->execute(['login'=>$login]);
-        $res = $req->fetch();
-        return $res;   
-    }
-
-    // Fonction qui gère les msg d'erreur
-    public function error() {
-        if(isset($_GET['err']) && $_GET['err']=='emptylogin') {
-            echo '<p>Le champs login est vide.</p>';
-        }
-
-        if(isset($_GET['err']) && $_GET['err']=='loginexit') {
-            echo '<p>Le login exite déja.</p>';
-        }
-
-        if(isset($_GET['err']) && $_GET['err']=='emptymdp') {
-            echo '<p>Le champs mot de passe est vide.</p>';
-        }
-        if(isset($_GET['err']) && $_GET['err']=='emptymdp2') {
-            echo '<p>La confirmation de mot de passe est vide.</p>';
-        }
-
-        if(isset($_GET['err']) && $_GET['err']=='mdpnotidem') { 
-            echo '<p>La confirmation de mot de passe ne correspond pas au mot de passe.</p>';
-        }
-    }
-
     // Fonction pour enregistrer un nouvel utilisateur
     public function register($login, $password) {   
         $this->login = $login;
@@ -71,7 +39,7 @@ class User {
             header("Location: ../../view/connexion.php?err=emptylogin");        
         }
         elseif(empty($password)) {
-            header("Location: ../../view/connexion.php?err=emptyemptymdp");
+            header("Location: ../../view/connexion.php?err=emptymdp");
         }
         elseif(!empty($res) && password_verify($password, $res[0]['password'])) {  
             $_SESSION['id'] = $res[0]['id'];
@@ -79,18 +47,10 @@ class User {
             header("Location: ../../view/accueil.php?msg=connectreussie");
         } 
         else {
-            header("Location: ../../view/connexion.php?msg=errlogmdp");        
+            header("Location: ../../view/connexion.php?err=errlogmdp");        
         }
     }
     
-    // Message de bienvenue quand le user est connecté
-    public function message() {
-        if(isset($_SESSION['login']))
-        {
-            echo "<span> Bonjour ".ucfirst($_SESSION['login']).", vous êtes connecté !</span>";
-        }
-    }
-
     // Fonction pr que le user se déconnecte 
     public function disconnect() {
         unset($_SESSION['game']);
@@ -106,7 +66,7 @@ class User {
         $session_login = $_SESSION['login']; 
 
         if(!empty($this->getLogin($login)['login']) && $session_login != $login) {
-            header("Location: ../../view/profil.php?err=loginexist");
+            header("Location: ../../view/profil.php?err=loginexit");
         }
         elseif(empty($login)) {
             header("Location: ../../view/profil.php?err=emptylogin");
@@ -132,20 +92,61 @@ class User {
             }
             elseif(empty($password)) {
                 header("Location: ../../view/profil.php?err=emptymdp");        
-                // die();
             }
             elseif(empty($password2)) {
                 header("Location: ../../view/profil.php?err=emptymdp2");
-                // die();   
             } 
             elseif($password != $password2) { 
-                header("Location: ../../view/profil.php?err=notidemmdp");  
-                // die();
+                header("Location: ../../view/profil.php?err=mdpnotidem");  
             } 
-     
         }
         else {
             header("Location: ../../view/profil.php?err=errmdpold");
+        }
+    }
+    
+    // Fonction pour verifier s'il n'y a pas déja un user en bdd
+    public function getLogin($login) {
+        $this->login = $login;
+
+        $req = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = :login");
+        $req->execute(['login'=>$login]);
+        $res = $req->fetch();
+        return $res;   
+    }
+
+    // Fonction qui gère les msg d'erreurs
+    public function error() {
+        if(isset($_GET['err']) && $_GET['err']=='emptylogin') {
+            echo '<p class="msg-error">Le champs login est vide.</p>';
+        }
+        if(isset($_GET['err']) && $_GET['err']=='loginexit') {
+            echo '<p class="msg-error">Le login existe déja.</p>';
+        }
+        if(isset($_GET['err']) && $_GET['err']=='emptymdp') {
+            echo '<p class="msg-error">Le champs mot de passe est vide.</p>';
+        }
+        if(isset($_GET['err']) && $_GET['err']=='emptymdp2') {
+            echo '<p class="msg-error">La confirmation de mot de passe est vide.</p>';
+        }
+        if(isset($_GET['err']) && $_GET['err']=='mdpnotidem') { 
+            echo '<p class="msg-error">La confirmation de mot de passe ne correspond pas au mot de passe.</p>';
+        }
+        if(isset($_GET['err']) && $_GET['err']=='errlogmdp') { 
+            echo '<p class="msg-error">Erreur de login ou de mot de passe.</p>';
+        } 
+        if(isset($_GET['msg']) && $_GET['msg']=='modifreussie') { 
+            echo '<p class="msg-error">Modification réussie.</p>';
+        }
+        if(isset($_GET['err']) && $_GET['err']=='errmdpold') { 
+            echo '<p class="msg-error">Ancien mot de passe incorrect.</p>';
+        }
+    }
+    // Message de bienvenue quand le user est connecté
+    public function message() {
+        if(isset($_SESSION['login']))
+        {
+            echo "<p> Bonjour <span class='msg-connect'>".ucfirst($_SESSION['login'])."</span>, vous êtes connecté !</p>";
         }
     }
 }

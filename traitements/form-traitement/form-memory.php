@@ -20,7 +20,7 @@ if(isset($_POST['jouer'])) {
             // On stocke le tableau GAME dans une session GAME
                 $_SESSION['game'] = $tableau['game'];
             // On mélange la session pour avoir les même cartes à chaque fois
-                // shuffle($_SESSION['game']);                
+                shuffle($_SESSION['game']);                
                 header("Location: ../../view/memory.php");
             }
         }
