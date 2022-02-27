@@ -32,6 +32,7 @@ require ('../traitements/page-traitement/traitement-memory.php');
                         <input type="submit" id="rejouer" name="rejouer" value="REJOUER">
                     </form> 
                 </div>
+                <!-- <img src="../assets/img/fond-memory.png" alt=""> -->
                 <div class="container-cards">
                 <?php
                     $game = $_SESSION['game'];
@@ -52,8 +53,8 @@ require ('../traitements/page-traitement/traitement-memory.php');
                     
                         $_SESSION['coup']++; // 
                         unset($_SESSION['tableau']);
-                    }   
-                ?>   
+                    } 
+                    ?> 
                 </div>
                 <?php 
                     if(isset($_SESSION['coup'])) {
@@ -67,17 +68,13 @@ require ('../traitements/page-traitement/traitement-memory.php');
                     }
                     if(isset($_SESSION['point'])) {
                         echo '<p> Points : '.$_SESSION['point'].'</p>';
-                    } 
-                    if(isset($_SESSION['dateGame'])) {
-                        echo '<p> Date : '.$_SESSION['dateGame'].'</p>';
-                    } 
+                    }
                     if(isset($_SESSION['msgEndGame'])) {
                         echo $_SESSION['msgEndGame'].'</div>';
                     } 
-                //require ('../traitements/page-traitement/test.php');
                 ?>
             </section>
-        </main>
+        </main>  
         <?php require('require/footer.php'); ?>         
     </body>
 </html>

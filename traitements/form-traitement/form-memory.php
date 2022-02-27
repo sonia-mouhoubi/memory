@@ -36,6 +36,8 @@ if(isset($_POST['rejouer'])) {
     $_SESSION['nbPaire'] = 0;
     $_SESSION['level'] = 0;
     $_SESSION['point'] = 0;
+    unset($_SESSION['tableau']);
+
     unset($_SESSION['msgEndGame']);
     header("Location: ../../view/memory.php");
 }

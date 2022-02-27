@@ -1,0 +1,373 @@
+/*============================================== VERSION MOBILE ========================================*/
+/************************************ CSS de BASE *******************************/
+* {
+	box-sizing : border-box;
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    width: 100%;
+}
+body {
+    scroll-behavior: smooth;
+    line-height: 1.15;
+	margin : 0;
+    font-family: 'Roboto', sans-serif;    
+    font-size: 1em;
+    color: white;
+    background-color: #272727;
+}
+main section:first-child {
+    margin-bottom: 4rem;
+}
+section {
+    padding: 0.5rem;
+}
+h1 {
+    font-size: 3em;
+    color: rgb(255, 2, 78);
+}
+h1, h2 {
+    margin: 0;
+    padding: 0.2em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2em;
+    text-align: center;
+}
+a {
+	text-decoration : none;
+	font-weight : bold;
+    color: rgb(255, 2, 78);
+}
+p {
+    padding: 0.5em;
+}
+img {
+    max-width: 100%;
+}
+.form {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 3em;
+    padding : 2em;  
+    font-weight: bolder;
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+}
+.form label {
+    color : black;
+}
+.form input {
+    width: 100%;
+    margin: 2em auto;
+    border-top: black;
+    border-left: transparent;
+    border-right: transparent;
+}
+.form input[type="submit"] {
+    width: 50%;
+    font-weight: bolder;
+    font-size: 1rem;
+    background-color: inherit;
+    border: 2px solid black;
+    padding: 0.5rem;   
+    border-radius: 25px; 
+}
+/* Message pour les visiteurs connectés */
+.msg-connect {
+    font-weight: bolder;
+    color: rgb(253, 207, 0);
+}
+/* Msg d'erreur */
+.msg-error {
+    color: #ff0606;
+}
+/************************************ HEADER *******************************/
+header {
+    position : relative;
+}
+/* LOGO */
+.logo {
+    z-index: 20;
+    display: block;
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    width: 40%;
+    padding: 1rem;
+    color: rgb(253, 207, 0);
+}
+/* Menu BURGER */
+.menu-burger {
+    z-index: 20;
+    position: absolute;
+    top : 1.5em;
+    right : 3em;
+}
+.menu-burger span {
+    position: absolute;
+    display: block;
+    width: 35px;
+    height: 7px;
+    background-color : rgb(255, 2, 78);
+    border-radius: 25px;
+}
+.menu-burger :nth-child(1) {
+    transform: translateY(10px);
+}
+.menu-burger :nth-child(2) {
+    transform: translateY(-10px);
+}
+#burger[type="checkbox"]:checked ~ .menu-burger :nth-child(1) {
+    transform: rotate(45deg);
+}
+#burger[type="checkbox"]:checked ~ .menu-burger :nth-child(2) {
+    transform: rotate(-45deg);
+}
+#burger[type="checkbox"]:checked ~ .menu-burger :nth-child(3) {
+    display: none;
+}
+.menu-burger :nth-child(1), .menu-burger :nth-child(2) {
+    transition: all 330ms;
+}
+#burger[type="checkbox"]:checked ~ nav {
+    height: 100vh;
+}
+nav {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 0;
+    overflow : hidden;
+    transition: all 330ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    background-color: rgb(255, 255, 203);
+}
+nav a {
+    color: rgb(253, 207, 0);
+    padding: 1em;
+}
+/* Bouton déconnection */
+header input[type="submit"] {
+    margin-top : 2em;
+    margin-bottom : 2em;
+    font-weight: bolder;
+    color: rgb(253, 207, 0);
+    background-color: inherit;
+    border-style: none;
+}
+
+/************************************ FOOTER *******************************/
+footer {
+    padding: 2rem;
+    text-align: center;
+    background-color: rgb(255, 255, 203);
+    clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
+}
+
+/************************************ WALL OF FAME *******************************/
+.body-walloffame {
+    background-image: url(../assets/svg/body-profil.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.wall-of-fame {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 5rem;
+}
+.wall-of-fame div {
+    z-index: 1;
+    position: relative;
+    margin: 0.5rem;
+    border-radius: 15px;
+    background-color: #fdd2cf;
+    color: black;
+}
+.wall-of-fame h1 {
+    flex-basis: 100%;
+}
+.wall-of-fame p {
+    max-width: 100%;
+    padding: 0.3rem;
+    font-size: 0.9rem;
+}
+
+/************************************ MEMORY *******************************/
+.jeux {
+    position: relative;
+    min-height: 70vh;
+    margin: auto;
+    background-image: url(../assets/img/carte-memory.png);
+    /* background-repeat: repeat-y; */
+    background-repeat: repeat-y;
+    /* background-position: center; */
+    background-size: 20vw;
+
+}
+.jeux h1 {
+    padding: 0.2rem;
+}
+.form-jeux {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    background-color: #f0b8bb;
+    padding: 1rem;
+}
+.jeux form input[type="submit"] {
+    border-radius: 25px; 
+    padding : 0.2rem 0.3rem;
+}
+.container-cards {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;    
+}
+.cartes {
+    width: 8vh;
+    height: 8vh;
+    background-color: rgb(255, 255, 203);
+    margin: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+
+}
+.score-game {
+    margin-top: 1rem;
+    background-color: #f0b8bb;
+}
+.score-game p {
+    border: solid black 1px;
+}
+
+/************************************ PROFIL *******************************/
+.progression-game h1{
+    flex-basis: 100%;
+}
+.progression-game div {
+    display: flex;
+    color: black;
+    background-color: bisque;
+    /* width: 75vw; */
+    margin: 0.2rem;
+    border: solid #ff6e41 1px;
+}
+
+/*============================================== VERSION DESKTOP ========================================*/
+@media screen and (min-width: 1024px){
+    body {    
+        font-size: 1.2em;
+    }
+    h1, h2 {
+        margin : 1rem;
+    }
+    p {
+        padding: 1em;
+    }
+    .form {
+        width: 40%;
+    }
+/************************************ HEADER *******************************/
+    .menu-burger {
+        display: none;
+    }
+    nav {
+        padding: 1rem;
+        clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+        height: 10vh;
+        flex-direction: row;
+        width: auto;
+    }
+/************************************ ACCUEIL *******************************/
+    .section-accueil {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .section-accueil h1 {
+        flex-basis: 100%;
+    }
+    .section-accueil div {
+        width: 50%;
+        margin-top: 3rem;
+        padding-left: 2rem;
+    }
+    .section-accueil img {
+        width: 18vw;
+        margin: auto;
+    }
+/************************************ WALL OF FAME *******************************/
+    .wall-of-fame {
+        width: 80%;
+        margin: auto;
+        margin-bottom: 6rem;
+    }
+
+/************************************ MEMORY *******************************/
+    .jeux {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .jeux h1 {
+        flex-basis: 100%;
+    }
+    .form-jeux {
+        position: absolute;
+        top : -3rem;
+        right : 1rem;
+    }
+    .jeux form input[type="submit"] {
+        margin : 0.2rem; 
+        padding : 0.2rem;  
+        border-radius: 25px; 
+    }
+    .container-cards {
+        width: 70%;  
+    }
+    .cartes {
+        width: 14vh;
+        height: 14vh;
+    }
+    .score-game {
+        margin-right: 1rem;
+        width: 25%;
+    }
+/************************************ PROFIL *******************************/
+    .main-profil {
+        display: flex;
+    }
+    .section-profil {
+        width: 50%;
+    }
+    .section-profil form {
+        padding-top: 0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 1.2rem;
+        padding-bottom: 0;
+    }
+    .section-profil input {
+        margin: 0.5rem;
+    }
+    .section-profil input:last-child {
+        padding: 0.2rem;
+    }
+    .progression-game {
+        width: 50%;
+    }
+    .progression-game div {
+        /* width: 30vw; */
+        height: 10vh;
+    }   
+}
+
+
+
+

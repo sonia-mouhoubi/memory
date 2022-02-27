@@ -38,7 +38,7 @@ Class Score {
     } 
 
     public function getInfosUser($login) {
-        $req = $this->bdd->prepare("SELECT login, point, level, coup FROM `scores` INNER JOIN utilisateurs ON utilisateurs.id = scores.id_utilisateur  WHERE login = ? ORDER BY `scores`.`point` DESC LIMIT 10");
+        $req = $this->bdd->prepare("SELECT date, login, point, level, coup FROM `scores` INNER JOIN utilisateurs ON utilisateurs.id = scores.id_utilisateur  WHERE login = ? ORDER BY `scores`.`point` DESC LIMIT 10");
         $req->execute([$login]);
         $res = $req->fetchAll();
         return $res;   

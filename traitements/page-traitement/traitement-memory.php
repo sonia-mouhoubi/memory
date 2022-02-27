@@ -40,15 +40,105 @@ if(isset($_SESSION['game'])) {
                 $_SESSION['coup']++;
                 unset($_SESSION['tableau']);
 
-            }  
-            // // Sinon elles se retournent
-            // else { 
-            //     $_SESSION['tableau'][1]->etat = 'close';
-            //     $_SESSION['tableau'][2]->etat = 'close';
+                // Quand les cartes sont toutes retournées
+if($_SESSION['nbPaire'] == $_SESSION['nb_carte']) {
+    switch($_SESSION['nb_carte']):
+        case 3:
+            if($_SESSION['coup'] <= 6) {
+                $_SESSION['point']+=10;
+            }
+            elseif($_SESSION['coup'] >= 6) {
+                $_SESSION['point']+=2;
+            }
+            break;
+        case 4:
+            if($_SESSION['coup'] <= 8) {
+                $_SESSION['point']+=20;
+            }
+            elseif($_SESSION['coup'] >= 8) {
+                $_SESSION['point']+=4;
+            }
+            break;
+        case 5:
+            if($_SESSION['coup'] <= 10) {
+                $_SESSION['point']+=30;
+            }
+            elseif($_SESSION['coup'] >= 10) {
+                $_SESSION['point']+=6;
+            }
+            break;
+        case 6:
+            if($_SESSION['coup'] <= 12) {
+                $_SESSION['point']+=40;
+            }
+            elseif($_SESSION['coup'] >= 12) {
+                $_SESSION['point']+=8;
+            }
+            break;
+        case 7:
+            if($_SESSION['coup'] <= 14) {
+                $_SESSION['point']+=50;
+            }
+            elseif($_SESSION['coup'] >= 14) {
+                $_SESSION['point']+=10;
+            }
+            break;
+        case 8:
+            if($_SESSION['coup'] <= 16) {
+                $_SESSION['point']+=60;
+            }
+            elseif($_SESSION['coup'] >= 16) {
+                $_SESSION['point']-=12;
+            }
+            break;
+        case 9:
+            if($_SESSION['coup'] <= 18) {
+                $_SESSION['point']+=70;
+            }
+            elseif($_SESSION['coup'] >= 18) {
+                $_SESSION['point']+=14;
+            }
+            break;
+        case 10:
+            if($_SESSION['coup'] <= 20) {
+                $_SESSION['point']+=80;
+            }
+            elseif($_SESSION['coup'] >= 20) {
+                $_SESSION['point']+=16;
+            }
+            break;
+        case 11:
+            if($_SESSION['coup'] <= 22) {
+                $_SESSION['point']+=90;
+            }
+            elseif($_SESSION['coup'] >= 22) {
+                $_SESSION['point']+=18;
+            }
+            break;
+        case 12:
+            if($_SESSION['coup'] <= 24) {
+                $_SESSION['point']+=100;
+            }
+            elseif($_SESSION['coup'] >= 24) {
+                $_SESSION['point']+=20;
+            }
+            break;
+    endswitch;
 
-            //     $_SESSION['coup']++; // 
-            //     unset($_SESSION['tableau']);
-            // } 
+    $_SESSION['msgEndGame'] = "Partie finie ! Vous avez gagné la partie en ".$_SESSION['coup']." coup.";
+    $_SESSION['dateGame'] = $dateGame->format('Y-m-d H:i:s');
+
+    $score->registerCoup($_SESSION['dateGame'], $_SESSION['level'], $_SESSION['coup'], $_SESSION['point'], $_SESSION['id']); 
+}
+            }  
+            // Sinon elles se retournent
+        //     else { 
+        //         $_SESSION['tableau'][1]->etat = 'close';
+        //         $_SESSION['tableau'][2]->etat = 'close';
+
+        //         $_SESSION['coup']++; // 
+        //         unset($_SESSION['tableau']);
+        //     } 
         }
         else {
             // Création d'une session tableau qui stoque mon game et son id
@@ -61,97 +151,95 @@ else {
     $_SESSION['game'] = [];
 }
 
-// Quand les cartes sont toutes retournées
-// if(isset($_SESSION['nbCarte'])) {
-    if($_SESSION['nbPaire'] == $_SESSION['nb_carte']) {
-        switch($_SESSION['nb_carte']):
-            case 3:
-                if($_SESSION['coup'] <= 6) {
-                    $_SESSION['point']+=10;
-                }
-                elseif($_SESSION['coup'] >= 6) {
-                    $_SESSION['point']+=2;
-                }
-                break;
-            case 4:
-                if($_SESSION['coup'] <= 8) {
-                    $_SESSION['point']+=20;
-                }
-                elseif($_SESSION['coup'] >= 8) {
-                    $_SESSION['point']+=4;
-                }
-                break;
-            case 5:
-                if($_SESSION['coup'] <= 10) {
-                    $_SESSION['point']+=30;
-                }
-                elseif($_SESSION['coup'] >= 10) {
-                    $_SESSION['point']+=6;
-                }
-                break;
-            case 6:
-                if($_SESSION['coup'] <= 12) {
-                    $_SESSION['point']+=40;
-                }
-                elseif($_SESSION['coup'] >= 12) {
-                    $_SESSION['point']+=8;
-                }
-                break;
-            case 7:
-                if($_SESSION['coup'] <= 14) {
-                    $_SESSION['point']+=50;
-                }
-                elseif($_SESSION['coup'] >= 14) {
-                    $_SESSION['point']+=10;
-                }
-                break;
-            case 8:
-                if($_SESSION['coup'] <= 16) {
-                    $_SESSION['point']+=60;
-                }
-                elseif($_SESSION['coup'] >= 16) {
-                    $_SESSION['point']-=12;
-                }
-                break;
-            case 9:
-                if($_SESSION['coup'] <= 18) {
-                    $_SESSION['point']+=70;
-                }
-                elseif($_SESSION['coup'] >= 18) {
-                    $_SESSION['point']+=14;
-                }
-                break;
-            case 10:
-                if($_SESSION['coup'] <= 20) {
-                    $_SESSION['point']+=80;
-                }
-                elseif($_SESSION['coup'] >= 20) {
-                    $_SESSION['point']+=16;
-                }
-                break;
-            case 11:
-                if($_SESSION['coup'] <= 22) {
-                    $_SESSION['point']+=90;
-                }
-                elseif($_SESSION['coup'] >= 22) {
-                    $_SESSION['point']+=18;
-                }
-                break;
-            case 12:
-                if($_SESSION['coup'] <= 24) {
-                    $_SESSION['point']+=100;
-                }
-                elseif($_SESSION['coup'] >= 24) {
-                    $_SESSION['point']+=20;
-                }
-                break;
-        endswitch;
+// // Quand les cartes sont toutes retournées
+// if($_SESSION['nbPaire'] == $_SESSION['nb_carte']) {
+//     switch($_SESSION['nb_carte']):
+//         case 3:
+//             if($_SESSION['coup'] <= 6) {
+//                 $_SESSION['point']+=10;
+//             }
+//             elseif($_SESSION['coup'] >= 6) {
+//                 $_SESSION['point']+=2;
+//             }
+//             break;
+//         case 4:
+//             if($_SESSION['coup'] <= 8) {
+//                 $_SESSION['point']+=20;
+//             }
+//             elseif($_SESSION['coup'] >= 8) {
+//                 $_SESSION['point']+=4;
+//             }
+//             break;
+//         case 5:
+//             if($_SESSION['coup'] <= 10) {
+//                 $_SESSION['point']+=30;
+//             }
+//             elseif($_SESSION['coup'] >= 10) {
+//                 $_SESSION['point']+=6;
+//             }
+//             break;
+//         case 6:
+//             if($_SESSION['coup'] <= 12) {
+//                 $_SESSION['point']+=40;
+//             }
+//             elseif($_SESSION['coup'] >= 12) {
+//                 $_SESSION['point']+=8;
+//             }
+//             break;
+//         case 7:
+//             if($_SESSION['coup'] <= 14) {
+//                 $_SESSION['point']+=50;
+//             }
+//             elseif($_SESSION['coup'] >= 14) {
+//                 $_SESSION['point']+=10;
+//             }
+//             break;
+//         case 8:
+//             if($_SESSION['coup'] <= 16) {
+//                 $_SESSION['point']+=60;
+//             }
+//             elseif($_SESSION['coup'] >= 16) {
+//                 $_SESSION['point']-=12;
+//             }
+//             break;
+//         case 9:
+//             if($_SESSION['coup'] <= 18) {
+//                 $_SESSION['point']+=70;
+//             }
+//             elseif($_SESSION['coup'] >= 18) {
+//                 $_SESSION['point']+=14;
+//             }
+//             break;
+//         case 10:
+//             if($_SESSION['coup'] <= 20) {
+//                 $_SESSION['point']+=80;
+//             }
+//             elseif($_SESSION['coup'] >= 20) {
+//                 $_SESSION['point']+=16;
+//             }
+//             break;
+//         case 11:
+//             if($_SESSION['coup'] <= 22) {
+//                 $_SESSION['point']+=90;
+//             }
+//             elseif($_SESSION['coup'] >= 22) {
+//                 $_SESSION['point']+=18;
+//             }
+//             break;
+//         case 12:
+//             if($_SESSION['coup'] <= 24) {
+//                 $_SESSION['point']+=100;
+//             }
+//             elseif($_SESSION['coup'] >= 24) {
+//                 $_SESSION['point']+=20;
+//             }
+//             break;
+//     endswitch;
 
-        $_SESSION['msgEndGame'] = "Partie finie ! Vous avez gagné la partie en ".$_SESSION['coup']." coup.";
-        $_SESSION['dateGame'] = $dateGame->format('Y-m-d H:i:s');
+//     $_SESSION['msgEndGame'] = "Partie finie ! Vous avez gagné la partie en ".$_SESSION['coup']." coup.";
+//     $_SESSION['dateGame'] = $dateGame->format('Y-m-d H:i:s');
 
-        $score->registerCoup($_SESSION['dateGame'], $_SESSION['level'], $_SESSION['coup'], $_SESSION['point'], $_SESSION['id']); 
-    }
+//     $score->registerCoup($_SESSION['dateGame'], $_SESSION['level'], $_SESSION['coup'], $_SESSION['point'], $_SESSION['id']); 
 // }
 
 ?>

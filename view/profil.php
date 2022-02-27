@@ -51,6 +51,7 @@ $score = new Score();
                 <?php
                 foreach($score->getInfosUser($_SESSION['login']) as $value) {
                     echo '<div>';
+                    echo '<p>Date : '.$value['date'].'</p>';
                     echo '<p>Point : '.$value['point'].'</p>';
                     echo '<p>Niveau : '.$value['level'].'</p>';
                     echo '<p>Coup : '.$value['coup'].'</p>';  
